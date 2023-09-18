@@ -56,12 +56,13 @@ public class WinkPatchEarlyInitFactory implements IServiceFactory {
 
 				ILoggerFactory factory = StaticLoggerBinder.getSingleton().getLoggerFactory();
 				if(factory instanceof SimpleLoggerFactory) {
+					// Read the Map "loggerMap" property and fill in loggers for the above names
+					
 					Field loggerMapField = factory.getClass().getDeclaredField("loggerMap"); //$NON-NLS-1$
 					loggerMapField.setAccessible(true);
 					@SuppressWarnings("unchecked")
 					Map<String, org.slf4j.Logger> loggerMap = (Map<String, org.slf4j.Logger>)loggerMapField.get(factory);
 					
-					// Read the Map "loggerMap" property and fill in loggers for the above names
 					for(String className : classes) {
 						org.slf4j.Logger log = new WinkShimLoggerFacade(Logger.getLogger(className));
 						loggerMap.put(className, log);
