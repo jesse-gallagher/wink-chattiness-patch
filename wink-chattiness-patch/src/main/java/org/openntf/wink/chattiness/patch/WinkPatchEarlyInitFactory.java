@@ -42,8 +42,6 @@ public class WinkPatchEarlyInitFactory implements IServiceFactory {
 
 		AccessController.doPrivileged((PrivilegedAction<Void>) () -> {
 			try {
-				// Now, iterate through each known class and shim in the wrapper for its "logger" property.
-				// Note: any classes listed here must have a static property named "logger" of type org.slf4j.Logger
 				String[] classes = new String[] {
 					"org.apache.wink.server.internal.log.Providers", //$NON-NLS-1$
 					"org.apache.wink.server.internal.log.Requests", //$NON-NLS-1$
