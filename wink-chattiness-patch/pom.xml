@@ -52,7 +52,7 @@
 				<executions>
 					<execution>
 						<id>generate-site</id>
-						<phase>install</phase>
+						<phase>package</phase>
 						<goals>
 							<goal>site</goal>
 						</goals>
@@ -84,13 +84,34 @@
 				<version>1.1.0</version>
 				<executions>
 					<execution>
-						<phase>install</phase>
+						<phase>package</phase>
 						<goals>
 							<goal>generate-site-xml</goal>
 						</goals>
 						<configuration>
 							<category>Wink Chattiness</category>
 						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<version>3.6.0</version>
+				<configuration>
+					<descriptors>
+						<descriptor>src/main/assembly/assembly.xml</descriptor>
+					</descriptors>
+					<finalName>Wink-Chattiness-Patch-${project.version}</finalName>
+					<appendAssemblyId>false</appendAssemblyId>
+				</configuration>
+				<executions>
+					<execution>
+						<id>make-assembly</id>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
 					</execution>
 				</executions>
 			</plugin>
